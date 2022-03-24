@@ -32,3 +32,6 @@ hc_alpha-*.tar
 npm-debug.log
 /assets/node_modules/
 
+# Docker
+postgres-data
+.env

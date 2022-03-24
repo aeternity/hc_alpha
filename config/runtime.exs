@@ -13,12 +13,31 @@ if System.get_env("PHX_SERVER") && System.get_env("RELEASE_NAME") do
 end
 
 if config_env() == :prod do
-  database_url =
-    System.get_env("DATABASE_URL") ||
+  db_user =
+    System.get_env("POSTGRES_USER") ||
       raise """
-      environment variable DATABASE_URL is missing.
-      For example: ecto://USER:PASS@HOST/DATABASE
+        environment variable POSTGRES_USER is missing.
       """
+
+  db_pass =
+    System.get_env("POSTGRES_PASSWORD") ||
+      raise """
+        environment variable POSTGRES_PASSWORD is missing.
+      """
+
+  db_host =
+    System.get_env("POSTGRES_HOST") ||
+      raise """
+        environment variable POSTGRES_HOST is missing.
+      """
+
+  db_db =
+    System.get_env("POSTGRES_DB") ||
+      raise """
+        environment variable POSTGRES_DBis missing.
+      """
+
+  database_url = "ecto://#{db_user}:#{db_pass}@#{db_host}/#{db_db}"
 
   maybe_ipv6 = if System.get_env("ECTO_IPV6"), do: [:inet6], else: []
 
@@ -37,7 +56,7 @@ if config_env() == :prod do
     System.get_env("SECRET_KEY_BASE") ||
       raise """
       environment variable SECRET_KEY_BASE is missing.
-      You can generate one by calling: mix phx.gen.secret
+      You can generate one by calling: mix phx.gen.secret !
       """
 
   host = System.get_env("PHX_HOST") || "example.com"

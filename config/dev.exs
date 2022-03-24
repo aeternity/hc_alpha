@@ -2,8 +2,8 @@ import Config
 
 # Configure your database
 config :hc_alpha, HcAlpha.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: "hc_alpha",
+  password: "hc_alpha_pass",
   hostname: "localhost",
   database: "hc_alpha_dev",
   show_sensitive_data_on_connection_error: true,
