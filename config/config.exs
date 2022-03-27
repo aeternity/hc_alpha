@@ -8,7 +8,9 @@
 import Config
 
 config :hc_alpha,
-  ecto_repos: [HcAlpha.Repo]
+  ecto_repos: [HcAlpha.Repo],
+  # node_url: "http://3.105.185.75:3013"
+  node_url: "http://13.239.157.207:3013"
 
 # Configures the endpoint
 config :hc_alpha, HcAlphaWeb.Endpoint,

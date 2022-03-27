@@ -10,7 +10,8 @@ defmodule HcAlpha.MixProject do
       compilers: [:gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      xref: [exclude: [:aeb_fate_encoding]]
     ]
   end
 
@@ -20,7 +21,7 @@ defmodule HcAlpha.MixProject do
   def application do
     [
       mod: {HcAlpha.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :httpoison, :aebytecode, :aeserialization]
     ]
   end
 
@@ -33,6 +34,13 @@ defmodule HcAlpha.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:httpoison, "~> 1.8"},
+      {:poison, "~> 3.1"},
+      {:aebytecode, git: "https://github.com/fabiankrol/aebytecode.git", branch: "demo_hc_alpha"},
+      {:aeserialization,
+       git: "https://github.com/fabiankrol/aeserialization.git",
+       branch: "demo_hc_alpha",
+       override: true},
       {:phoenix, "~> 1.6.6"},
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sql, "~> 3.6"},

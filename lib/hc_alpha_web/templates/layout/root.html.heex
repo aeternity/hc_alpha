@@ -5,26 +5,75 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <%= csrf_meta_tag() %>
-    <%= live_title_tag assigns[:page_title] || "HcAlpha", suffix: " · Phoenix Framework" %>
+    <%= live_title_tag assigns[:page_title] || "æternity hyperchains alpha demo" %>
     <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")}/>
     <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js")}></script>
+    <script>
+      const colorScheme = [
+          "#25CCF7","#FD7272","#54a0ff","#00d2d3",
+          "#1abc9c","#2ecc71","#3498db","#9b59b6","#34495e",
+          "#16a085","#27ae60","#2980b9","#8e44ad","#2c3e50",
+          "#f1c40f","#e67e22","#e74c3c","#ecf0f1","#95a5a6",
+          "#f39c12","#d35400","#c0392b","#bdc3c7","#7f8c8d",
+          "#55efc4","#81ecec","#74b9ff","#a29bfe","#dfe6e9",
+          "#00b894","#00cec9","#0984e3","#6c5ce7","#ffeaa7",
+          "#fab1a0","#ff7675","#fd79a8","#fdcb6e","#e17055",
+          "#d63031","#feca57","#5f27cd","#54a0ff","#01a3a4"
+      ];
+    </script>
   </head>
   <body>
-    <header>
-      <section class="container">
-        <nav>
-          <ul>
-            <li><a href="https://hexdocs.pm/phoenix/overview.html">Get Started</a></li>
-            <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
-              <li><%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) %></li>
+    <main>
+      <div class="container py-3">
+        <div class="py-2 border-bottom mb-3">
+          <div class="d-flex flex-wrap justify-content-center">
+            <div class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto">
+              <h3><%= link "æternity hyperchains alpha demo", to: Routes.page_path(@conn, :index), class: "text-dark text-decoration-none" %></h3>
+            </div>
+            <div class="text-end">
+              <!-- <h3><a class="link-secondary text-decoration-none" href="https://forum.aeternity.com/t/hyperchains-alpha/10192">forum</a></h3> -->
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <%
+            info = get_flash(@conn, :info)
+            error = get_flash(@conn, :error)
+            %>
+            <%= if info do %>
+              <div class="alert alert-info" role="alert"><%= info %></div>
             <% end %>
-          </ul>
-        </nav>
-        <a href="https://phoenixframework.org/" class="phx-logo">
-          <img src={Routes.static_path(@conn, "/images/phoenix.png")} alt="Phoenix Framework Logo"/>
-        </a>
-      </section>
-    </header>
-    <%= @inner_content %>
+            <%= if error do %>
+              <div class="alert alert-danger" role="alert"><%= error %></div>
+            <% end %>
+          </div>
+        </div>
+        <%= @inner_content %>
+      </div>
+    </main>
+    <div class="container py-3">
+      <footer class="pt-4 my-md-5 pt-md-5 border-top">
+        <div class="row">
+          <div class="col-6 col-md">
+
+            <h5>About Aeternity</h5>
+            <ul class="list-unstyled text-small">
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="https://aeternity.com">Aeternity</a></li>
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="https://www.aeternity-foundation.org">Aeternity Crypto Foundation</a></li>
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="https://forum.aeternity.com">Official forum</a></li>
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+            <h5>Explorers</h5>
+            <ul class="list-unstyled text-small">
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="https://explorer.mainnet.aeternity.io">MDW based explorer</a></li>
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="https://www.aeknow.org">AEKnow</a></li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+    </div>
+
   </body>
 </html>

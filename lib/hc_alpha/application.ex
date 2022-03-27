@@ -15,9 +15,9 @@ defmodule HcAlpha.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: HcAlpha.PubSub},
       # Start the Endpoint (http/https)
-      HcAlphaWeb.Endpoint
-      # Start a worker by calling: HcAlpha.Worker.start_link(arg)
-      # {HcAlpha.Worker, arg}
+      HcAlphaWeb.Endpoint,
+      # Start chain monitor supervision tree
+      HcAlpha.ChainMonitor.Supervisor
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

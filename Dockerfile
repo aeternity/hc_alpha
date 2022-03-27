@@ -12,7 +12,7 @@ ENV POSTGRES_DB=$POSTGRES_DB
 ENV POSTGRES_HOST=$POSTGRES_HOST
 
 RUN apt-get update && \
-    apt-get install --yes build-essential inotify-tools postgresql-client git && \
+    apt-get install --yes build-essential inotify-tools postgresql-client git npm && \
     apt-get clean
 
 # Install Phoenix packages
@@ -23,6 +23,10 @@ RUN mix local.hex --force && \
 # Cache elixir deps
 ADD mix.exs mix.lock ./
 RUN mix do deps.get, deps.compile
+
+ADD assets/package.json assets/
+RUN cd assets && \
+    npm install
 
 ADD . .
 

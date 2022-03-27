@@ -1,7 +1,7 @@
 version: "3.6"
 services:
   hc_alpha-postgres:
-    image: postgres
+    image: postgres:13.3
     hostname: hc_alpha-postgres
     restart: unless-stopped
     container_name: hc_alpha-postgres
@@ -31,7 +31,7 @@ services:
   caddy:
     image: caddy:2.3.0
     volumes:
-      #- "./Caddyfile:/etc/caddy/Caddyfile"
+      - "./Caddyfile:/etc/caddy/Caddyfile"
       - "caddy-data:/data/caddy"
       - "caddy-config:/config/caddy"
     ports:

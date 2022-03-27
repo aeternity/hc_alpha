@@ -1,0 +1,17 @@
+<h4 class="mt-4">Validators</h4>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Validator</th>
+      <th scope="col">Balance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for balance <- @balances do %>
+      <tr>
+        <td><%= balance.account %></td>
+        <td><%= balance.balance %> AE</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

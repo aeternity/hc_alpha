@@ -1,5 +1,6 @@
 defmodule HcAlphaWeb.Router do
   use HcAlphaWeb, :router
+  import Phoenix.LiveView.Router
 
   pipeline :browser do
     plug :accepts, ["html"]

@@ -1,0 +1,37 @@
+<h4 class="mt-4">Key blocks distribution</h4>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Validator</th>
+      <th scope="col">Block count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for distr <- @distribution do %>
+      <tr>
+        <td><%= distr.address %></td>
+        <td><%= distr.count %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h4 class="mt-4">Top key blocks</h4>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Height</th>
+      <th scope="col">Hash</th>
+      <th scope="col">Validator</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for block <- @key_blocks do %>
+      <tr>
+        <td><%= block.height %></td>
+        <td><%= block.hash %></td>
+        <td><%= block.validator %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

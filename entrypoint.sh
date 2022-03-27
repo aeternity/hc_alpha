@@ -14,7 +14,6 @@ if [[ `psql -Atqc "\\list ${POSTGRES_DB}" -h $POSTGRES_HOST -U $POSTGRES_USER po
 else
   echo "Database $POSTGRES_DB does not exist. Creating..."
   mix ecto.setup
-  mix run priv/repo/exchanges.exs
   echo "Database $POSTGRES_DB created."
 fi
 
