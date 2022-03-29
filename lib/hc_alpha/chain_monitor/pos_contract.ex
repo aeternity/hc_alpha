@@ -1,44 +1,17 @@
 defmodule HcAlpha.ChainMonitor.PosContract do
+  use HcAlpha.ChainMonitor.Worker
+
   @interval 15000
   @contract "ct_LRbi65kmLtE7YMkG6mvG5TxAXTsPJDZjAtsPuaXtRyPA7gnfJ"
   @validator1 "ak_2MGLPW2CHTDXJhqFJezqSwYSNwbZokSKkG7wSbGtVmeyjGfHtm"
   @validator2 "ak_nQpnNuBPQwibGpSJmjAah6r3ktAB7pG9JHuaGWHgLKxaKqEvC"
   @validator3 "ak_LRbi65kmLtE7YMkG6mvG5TxAXTsPJDZjAtsPuaXtRyPA7gnfJ"
 
-  def start_link() do
-    GenServer.start_link(__MODULE__, [], name: __MODULE__)
-  end
+  def interval(), do: @interval
 
-  def child_spec(_opts) do
-    %{
-      id: __MODULE__,
-      start: {__MODULE__, :start_link, []},
-      type: :worker,
-      restart: :transient
-    }
-  end
+  def init(), do: %{}
 
-  def init(_) do
-    send(self(), :refresh)
-    {:ok, %{}}
-  end
-
-  def handle_call(_, _from, state), do: {:reply, :ok, state}
-
-  def handle_info(:refresh, _state) do
-    state = refresh_data()
-    refresh_timer()
-    {:noreply, state}
-  end
-
-  def handle_info(_, state), do: {:noreply, state}
-
-  defp refresh_timer() do
-    interval = @interval
-    Process.send_after(self(), :refresh, interval)
-  end
-
-  defp refresh_data() do
+  def refresh(state) do
     call(:leader)
     call(:elect_next)
 
@@ -46,6 +19,8 @@ defmodule HcAlpha.ChainMonitor.PosContract do
     [{:balance, @validator1}, {:balance, @validator2}]
     |> Enum.map(fn key -> call(key) end)
     |> HcAlpha.Pos.broadcast_balances()
+
+    state
   end
 
   defp call(key) do
