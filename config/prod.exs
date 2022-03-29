@@ -19,8 +19,7 @@ config :logger, level: :info
 # To get SSL working, you will need to add the `https` key
 # to the previous section and set your `:url` port to 443:
 #
-config :hc_alpha, HcAlphaWeb.Endpoint,
-  check_origin: false
+config :hc_alpha, HcAlphaWeb.Endpoint, check_origin: false
 #
 # The `cipher_suite` is set to `:strong` to support only the
 # latest and more secure SSL ciphers. This means old browsers

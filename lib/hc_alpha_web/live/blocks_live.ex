@@ -31,9 +31,8 @@ defmodule HcAlphaWeb.BlocksLive do
   end
 
   def update_key_blocks(old, new) do
-    new ++ old
+    (new ++ old)
     |> Enum.sort(fn l, r -> l.height >= r.height end)
     |> Enum.take(25)
   end
-
 end
