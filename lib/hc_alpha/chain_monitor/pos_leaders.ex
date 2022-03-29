@@ -11,17 +11,15 @@ defmodule HcAlpha.ChainMonitor.PosLeaders do
 
   def init(), do: %{}
 
-  def refresh(state) do
+  def refresh(_state) do
     keys = [:leader, :elect_next]
 
     keys
     |> to_calldata()
     |> dry_run()
-    |> parse_response()
-    |> Enum.zip(keys)
+    |> parse_response(keys)
     |> broadcast()
-
-    state
+    |> Enum.into(%{})
   end
 
   defp to_calldata(:leader), do: "cb_KxGkPMxUP7a3L/k="
@@ -30,15 +28,20 @@ defmodule HcAlpha.ChainMonitor.PosLeaders do
 
   defp dry_run(data), do: HcAlpha.Node.dry_run(@contract, data)
 
-  defp parse_response({:ok, %{"results" => results}}), do: Enum.map(results, &parse_result/1)
+  defp parse_response({:ok, %{"results" => results}}, keys),
+    do: Enum.zip_with(keys, results, &parse_result/2)
 
-  defp parse_result(%{"result" => "ok", "call_obj" => %{"return_value" => value}}),
-    do: to_address(value)
+  defp parse_result(key, %{"result" => "ok", "call_obj" => %{"return_value" => value}}),
+    do: {key, to_address(value)}
 
   defp to_address("cb_nwCgsbV3vNMnyznlXmwCa9anShs13mwGUMSuUe+rdZ5BW2bDvnY6"), do: @validator1
   defp to_address("cb_nwCgZxxVRkZJRXWytJT2UWghcQZj2EiTzdLSNgN6VMM+7oRJmcE0"), do: @validator2
   defp to_address("cb_nwCgLBrVdHQgYI8stKR7l956iLKOaTWpLuwYz9Ye4UzOsWhuxaJQ"), do: @validator3
 
-  defp broadcast({msg, key}), do: HcAlpha.Pos.broadcast(key, msg)
-  defp broadcast(list), do: Enum.each(list, &broadcast/1)
+  defp broadcast({key, msg}) do
+    HcAlpha.Pos.broadcast(key, msg)
+    {key, msg}
+  end
+
+  defp broadcast(list), do: Enum.map(list, &broadcast/1)
 end

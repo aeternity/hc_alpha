@@ -1,16 +1,20 @@
 defmodule HcAlphaWeb.NodeLive do
   use HcAlphaWeb, :live_view
 
+  @default "data collection..."
+
   @impl true
   def mount(_params, _session, socket) do
     if connected?(socket) do
       HcAlpha.Pos.subscribe(:leaders)
     end
 
+    leaders = HcAlpha.ChainMonitor.PosLeaders.state()
+
     socket =
       socket
-      |> assign(:current, "...")
-      |> assign(:next, "...")
+      |> assign(:current, Map.get(leaders, :leader, @default))
+      |> assign(:next, Map.get(leaders, :elect_next, @default))
 
     {:ok, socket}
   end
