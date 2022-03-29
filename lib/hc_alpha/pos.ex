@@ -11,14 +11,11 @@ defmodule HcAlpha.Pos do
   def subscribe(:leaders), do: Phoenix.PubSub.subscribe(HcAlpha.PubSub, "leaders")
   def subscribe(:balances), do: Phoenix.PubSub.subscribe(HcAlpha.PubSub, "balances")
 
-  def broadcast_current_leader(address),
-    do: Phoenix.PubSub.broadcast(HcAlpha.PubSub, "leaders", {:current_leader, address})
+  def broadcast(:balances, msg), do: broadcast_internal("balances", {:balances, msg})
+  def broadcast(:elect_next, msg), do: broadcast_internal("leaders", {:next_leader, msg})
+  def broadcast(:leader, msg), do: broadcast_internal("leaders", {:current_leader, msg})
 
-  def broadcast_next_leader(address),
-    do: Phoenix.PubSub.broadcast(HcAlpha.PubSub, "leaders", {:next_leader, address})
-
-  def broadcast_balances(balances),
-    do: Phoenix.PubSub.broadcast(HcAlpha.PubSub, "balances", {:balances, balances})
+  defp broadcast_internal(topic, msg), do: Phoenix.PubSub.broadcast(HcAlpha.PubSub, topic, msg)
 
   def balance_from_node_api(account, balance) do
     attrs = %{

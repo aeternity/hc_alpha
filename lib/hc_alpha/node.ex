@@ -11,9 +11,9 @@ defmodule HcAlpha.Node do
 
   def generations_at_hash(hash), do: Api.get("v2/generations/hash/" <> hash)
 
-  def dry_run(contract, calldata) do
-    Api.post("v3/dry-run", %{
-      "txs" => [
+  def dry_run(contract, list) when is_list(list) do
+    txs =
+      Enum.map(list, fn calldata ->
         %{
           "call_req" => %{
             "abi_version" => 3,
@@ -23,7 +23,10 @@ defmodule HcAlpha.Node do
             "gas" => 1_000_00
           }
         }
-      ]
-    })
+      end)
+
+    Api.post("v3/dry-run", %{"txs" => txs})
   end
+
+  def dry_run(contract, calldata), do: dry_run(contract, [calldata])
 end

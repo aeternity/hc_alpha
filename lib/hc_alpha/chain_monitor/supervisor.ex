@@ -6,11 +6,12 @@ defmodule HcAlpha.ChainMonitor.Supervisor do
   end
 
   @impl true
-  def init(_init_arg) do
+  def init(_arg) do
     children = [
       HcAlpha.ChainMonitor.Status,
       HcAlpha.ChainMonitor.Blocks,
-      HcAlpha.ChainMonitor.PosContract
+      HcAlpha.ChainMonitor.PosLeaders,
+      HcAlpha.ChainMonitor.PosBalances
     ]
 
     Supervisor.init(children, strategy: :one_for_one)

@@ -1,12 +1,10 @@
 defmodule HcAlpha.ChainMonitor.Worker do
-
   @callback interval() :: integer()
   @callback init() :: any()
   @callback refresh(any()) :: any()
 
   defmacro __using__(_args) do
     quote do
-
       def state(), do: GenServer.call(__MODULE__, :state)
 
       def start_link() do
@@ -41,8 +39,6 @@ defmodule HcAlpha.ChainMonitor.Worker do
       def refresh_timer(interval) do
         Process.send_after(self(), :refresh, interval)
       end
-
     end
   end
-
 end
