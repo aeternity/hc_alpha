@@ -3,14 +3,16 @@
   <thead>
     <tr>
       <th scope="col">Validator</th>
-      <th scope="col">Balance</th>
+      <th scope="col">Status</th>
+      <th scope="col">Stake</th>
     </tr>
   </thead>
   <tbody>
-    <%= for balance <- @balances do %>
+    <%= for v <- @validators do %>
       <tr>
-        <td><%= balance.account %></td>
-        <td><%= balance.balance %> AE</td>
+        <td><%= v.address %></td>
+        <td><%= v.status %></td>
+        <td><%= v.stake %> AE</td>
       </tr>
     <% end %>
   </tbody>

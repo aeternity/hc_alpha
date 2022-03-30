@@ -11,7 +11,7 @@ defmodule HcAlpha.ChainMonitor.Supervisor do
       HcAlpha.ChainMonitor.Status,
       HcAlpha.ChainMonitor.Blocks,
       HcAlpha.ChainMonitor.PosLeaders,
-      HcAlpha.ChainMonitor.PosBalances
+      HcAlpha.ChainMonitor.PosValidators
     ]
 
     Supervisor.init(children, strategy: :one_for_one)

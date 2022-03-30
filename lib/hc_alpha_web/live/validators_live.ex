@@ -1,23 +1,25 @@
 defmodule HcAlphaWeb.ValidatorsLive do
   use HcAlphaWeb, :live_view
 
+  alias HcAlpha.Pos.Validators
+
   @impl true
   def mount(_params, _session, socket) do
     if connected?(socket) do
-      HcAlpha.Pos.subscribe(:balances)
+      Validators.subscribe()
     end
 
-    balances = HcAlpha.Pos.balances()
+    validators = Validators.list()
 
     socket =
       socket
-      |> assign(:balances, balances)
+      |> assign(:validators, validators)
 
     {:ok, socket}
   end
 
   @impl true
-  def handle_info({:balances, balances}, socket) do
-    {:noreply, update(socket, :balances, fn _ -> balances end)}
+  def handle_info({:validators, v}, socket) do
+    {:noreply, update(socket, :validators, fn _ -> v end)}
   end
 end

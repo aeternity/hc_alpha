@@ -7,6 +7,8 @@ defmodule HcAlpha.ChainMonitor.Worker do
     quote do
       def state(), do: GenServer.call(__MODULE__, :state)
 
+      def refresh(), do: GenServer.cast(__MODULE__, :refresh)
+
       def start_link() do
         GenServer.start_link(__MODULE__, [], name: __MODULE__)
       end
@@ -27,6 +29,13 @@ defmodule HcAlpha.ChainMonitor.Worker do
 
       def handle_call(:state, _, state), do: {:reply, state.data, state}
       def handle_call(_, _, state), do: {:reply, :ok, state}
+
+      def handle_cast(:refresh, state) do
+        data = refresh(state.data)
+        {:noreply, %{state | data: data}}
+      end
+
+      def handle_cast(_, state), do: {:noreply, state}
 
       def handle_info(:refresh, state) do
         data = refresh(state.data)
