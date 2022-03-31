@@ -25,8 +25,21 @@ defmodule HcAlpha.Node do
         }
       end)
 
-    Api.post("v3/dry-run", %{"txs" => txs})
+    "v3/dry-run"
+    |> Api.post(%{"txs" => txs})
+    |> dry_run_response()
   end
 
   def dry_run(contract, calldata), do: dry_run(contract, [calldata])
+
+  defp dry_run_response({:ok, %{"results" => results}}) do
+    {:ok, Enum.map(results, &dry_run_result/1)}
+  end
+
+  defp dry_run_result(%{"call_obj" => %{"height" => height, "return_value" => value}}) do
+    %{
+      height: height,
+      value: HcAlpha.Pos.Contract.return_value(value)
+    }
+  end
 end

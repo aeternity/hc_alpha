@@ -3,14 +3,14 @@
   <div class="col-sm-6">
     <div class="card alert-success border-success">
       <div class="card-header">
-        Current leader: <%= @current %>
+        Current leader (height: <%= @current.height |> maybe_height()  %>): <%= @current.value %>
       </div>
     </div>
   </div>
   <div class="col-sm-6">
     <div class="card alert-success border-success">
       <div class="card-header">
-        next leader: <%= @next %>
+        next leader (height: <%= @current.height |> maybe_height(1) %>): <%= @next.value %>
       </div>
     </div>
   </div>

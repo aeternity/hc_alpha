@@ -1,7 +1,7 @@
 defmodule HcAlphaWeb.NodeLive do
   use HcAlphaWeb, :live_view
 
-  @default "data collection..."
+  @default %{height: nil, value: "data collection..."}
 
   @impl true
   def mount(_params, _session, socket) do
@@ -27,4 +27,9 @@ defmodule HcAlphaWeb.NodeLive do
   def handle_info({:next_leader, address}, socket) do
     {:noreply, update(socket, :next, fn _ -> address end)}
   end
+
+  def maybe_height(value), do: maybe_height(value, 0)
+
+  def maybe_height(nil, _), do: "n/a"
+  def maybe_height(value, offset), do: value + offset
 end

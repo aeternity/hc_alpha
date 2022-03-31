@@ -30,12 +30,10 @@ defmodule HcAlpha.ChainMonitor.PosValidators do
 
   defp dry_run(data), do: HcAlpha.Node.dry_run(Contract.id(), data)
 
-  defp parse_response({:ok, %{"results" => results}}, keys),
+  defp parse_response({:ok, results}, keys),
     do: Enum.zip_with(keys, results, &parse_result/2)
 
-  defp parse_result(key, %{"result" => "ok", "call_obj" => %{"return_value" => value}}) do
-    {key, Contract.return_value(value)}
-  end
+  defp parse_result(key, result), do: {key, result.value}
 
   defp broadcast(msg), do: Validators.broadcast(msg)
 end

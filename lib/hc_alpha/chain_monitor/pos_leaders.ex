@@ -24,11 +24,7 @@ defmodule HcAlpha.ChainMonitor.PosLeaders do
 
   defp dry_run(data), do: HcAlpha.Node.dry_run(Contract.id(), data)
 
-  defp parse_response({:ok, %{"results" => results}}, keys),
-    do: Enum.zip_with(keys, results, &parse_result/2)
-
-  defp parse_result(key, %{"result" => "ok", "call_obj" => %{"return_value" => value}}),
-    do: {key, Contract.return_value(value)}
+  defp parse_response({:ok, results}, keys), do: Enum.zip(keys, results)
 
   defp broadcast({key, msg}) do
     HcAlpha.Pos.broadcast(key, msg)
