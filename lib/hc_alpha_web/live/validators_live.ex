@@ -9,7 +9,7 @@ defmodule HcAlphaWeb.ValidatorsLive do
       Validators.subscribe()
     end
 
-    validators = Validators.list()
+    validators = Validators.list_top() |> sort()
 
     socket =
       socket
@@ -20,6 +20,9 @@ defmodule HcAlphaWeb.ValidatorsLive do
 
   @impl true
   def handle_info({:validators, v}, socket) do
-    {:noreply, update(socket, :validators, fn _ -> v end)}
+    v_sorted =
+    {:noreply, update(socket, :validators, fn _ -> sort(v) end)}
   end
+
+  defp sort(v), do: Enum.sort_by(v, &({&1.status, &1.address}), :desc)
 end

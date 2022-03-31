@@ -3,16 +3,20 @@
   <thead>
     <tr>
       <th scope="col">Validator</th>
+      <th scope="col">Height</th>
       <th scope="col">Status</th>
       <th scope="col">Stake</th>
+      <th scope="col">Balance</th>
     </tr>
   </thead>
   <tbody>
     <%= for v <- @validators do %>
       <tr>
         <td><%= v.address %></td>
+        <td><%= v.height %></td>
         <td><%= v.status %></td>
         <td><%= v.stake %> AE</td>
+        <td><%= v.balance %> AE</td>
       </tr>
     <% end %>
   </tbody>
