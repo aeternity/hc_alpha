@@ -1,4 +1,4 @@
-defmodule HcAlphaWeb.NodeLive do
+defmodule HcAlphaWeb.LeadersLive do
   use HcAlphaWeb, :live_view
 
   @default %{height: nil, value: "data collection..."}
