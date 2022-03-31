@@ -11,7 +11,8 @@ defmodule HcAlpha.Node do
 
   def generations_at_hash(hash), do: Api.get("v2/generations/hash/" <> hash)
 
-  def account(hash, height), do: Api.get("v2/accounts/" <> hash <> "/height/" <> Integer.to_string(height))
+  def account(hash, height),
+    do: Api.get("v2/accounts/" <> hash <> "/height/" <> Integer.to_string(height))
 
   def dry_run(contract, list) when is_list(list) do
     txs =

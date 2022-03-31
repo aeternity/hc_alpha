@@ -1,0 +1,25 @@
+<h4 class="mt-4">Observed validators history (top 50)</h4>
+<%= for {address, record} <- (@validators) do %>
+
+  <h5 class="mt-4"><%= address %></h5>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Height</th>
+      <th scope="col">Status</th>
+      <th scope="col">Stake</th>
+      <th scope="col">Balance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for r <- record do %>
+      <tr>
+        <td><%= r.height %></td>
+        <td><%= r.status %></td>
+        <td><%= r.stake %> AE</td>
+        <td><%= r.balance %> AE</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>

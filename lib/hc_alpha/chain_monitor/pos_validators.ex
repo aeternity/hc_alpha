@@ -21,14 +21,18 @@ defmodule HcAlpha.ChainMonitor.PosValidators do
     state
   end
 
-  defp to_maps({status, %{height: height, value: validators}}), do: Enum.map(validators, &to_map(&1, status, height))
+  defp to_maps({status, %{height: height, value: validators}}),
+    do: Enum.map(validators, &to_map(&1, status, height))
+
   defp to_maps(list), do: Enum.flat_map(list, &to_maps/1)
 
   defp to_map({address, stake}, status, height) do
-    balance = case HcAlpha.Node.account(address, height) do
-      {:ok, %{"balance" => b}} -> b
-      _ -> nil
-    end
+    balance =
+      case HcAlpha.Node.account(address, height) do
+        {:ok, %{"balance" => b}} -> b
+        _ -> nil
+      end
+
     Validators.create(address, height, status, stake, balance)
   end
 

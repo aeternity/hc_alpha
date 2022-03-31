@@ -29,10 +29,27 @@ defmodule HcAlpha.Pos.Validators do
   end
 
   def list_top() do
+    Repo.all(
+      from v in Validator,
+        distinct: v.address,
+        order_by: [v.address, desc: v.height],
+        select: v
+    )
+  end
+
+  def addresses() do
     Repo.all(from v in Validator,
       distinct: v.address,
-      order_by: [v.address, desc: v.height],
-      select: v
+      select: v.address
+    )
+  end
+
+  def get_limited(address, limit) do
+    Repo.all(from v in Validator,
+      where: v.address == ^address,
+      order_by: [desc: v.height],
+      select: v,
+      limit: ^limit
     )
   end
 
