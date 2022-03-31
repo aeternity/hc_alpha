@@ -21,7 +21,7 @@ defmodule HcAlpha.MixProject do
   def application do
     [
       mod: {HcAlpha.Application, []},
-      extra_applications: [:logger, :runtime_tools, :httpoison, :aebytecode, :aeserialization]
+      extra_applications: [:logger, :runtime_tools, :httpoison]
     ]
   end
 
@@ -36,11 +36,15 @@ defmodule HcAlpha.MixProject do
     [
       {:httpoison, "~> 1.8"},
       {:poison, "~> 3.1"},
-      {:aebytecode, git: "https://github.com/fabiankrol/aebytecode.git", branch: "demo_hc_alpha"},
       {:aeserialization,
        git: "https://github.com/fabiankrol/aeserialization.git",
        branch: "demo_hc_alpha",
        override: true},
+      {:aebytecode,
+       git: "https://github.com/fabiankrol/aebytecode.git",
+       branch: "demo_hc_alpha_2",
+       override: true},
+      {:aesophia, git: "https://github.com/aeternity/aesophia.git", branch: "master"},
       {:phoenix, "~> 1.6.6"},
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sql, "~> 3.6"},
