@@ -10,12 +10,3 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
-HcAlpha.Repo.insert!(%HcAlpha.Pos.Balance{
-  account: "ak_nQpnNuBPQwibGpSJmjAah6r3ktAB7pG9JHuaGWHgLKxaKqEvC",
-  balance: 0
-})
-
-HcAlpha.Repo.insert!(%HcAlpha.Pos.Balance{
-  account: "ak_2MGLPW2CHTDXJhqFJezqSwYSNwbZokSKkG7wSbGtVmeyjGfHtm",
-  balance: 0
-})
