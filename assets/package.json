@@ -9,8 +9,11 @@
   "dependencies": {
     "phoenix": "file:../deps/phoenix",
     "phoenix_html": "file:../deps/phoenix_html",
-    "phoenix_live_view": "file:../deps/phoenix_live_view"
+    "phoenix_live_view": "file:../deps/phoenix_live_view",
+    "vue": "^3.2.32"
   },
   "devDependencies": {
+    "esbuild": "^0.14.36",
+    "esbuild-plugin-vue3": "^0.3.0"
   }
 }

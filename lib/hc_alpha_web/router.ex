@@ -20,6 +20,7 @@ defmodule HcAlphaWeb.Router do
 
     get "/", PageController, :index
     get "/validators", ValidatorsController, :index
+    get "/staking", StakingController, :index
   end
 
   # Other scopes may use custom stacks.

@@ -1,0 +1,12 @@
+<section class="row">
+  <%= live_render(@conn, HcAlphaWeb.DelegatesLive) %>
+</section>
+
+<section class="row">
+  <div class="row">
+    <h3 class="mt-4">Staking</h3>
+  </div>
+</section>
+
+<input type="hidden" id="nodeUrl" value={@node}>
+<section class="row" id="app"></section>

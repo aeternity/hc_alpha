@@ -5,6 +5,8 @@ defmodule HcAlpha.Node do
 
   alias HcAlpha.Node.Api
 
+  def url(), do: Api.url("")
+
   def status(), do: Api.get("v2/status")
 
   def current_generation(), do: Api.get("v2/generations/current")

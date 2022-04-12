@@ -5,7 +5,7 @@
     <thead>
       <tr>
         <th scope="col">Delegate</th>
-        <th scope="col">Stake</th>
+        <th scope="col">shares</th>
         <th scope="col">% of shares</th>
       </tr>
     </thead>
@@ -13,11 +13,10 @@
       <%= for delegate <- delegates do %>
         <tr>
           <td><%= delegate.address %></td>
-          <td><%= to_ae_stake(delegate) %> AE</td>
           <td><%= to_shares(delegate) %></td>
+          <td><%= to_percent_shares(delegate) %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
-
 <% end %>

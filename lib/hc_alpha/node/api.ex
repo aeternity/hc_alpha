@@ -17,7 +17,7 @@ defmodule HcAlpha.Node.Api do
       |> HTTPoison.post(Poison.encode!(body), headers)
       |> parse_response()
 
-  defp url(uri),
+  def url(uri),
     do:
       :hc_alpha
       |> Application.fetch_env!(:node_url)
