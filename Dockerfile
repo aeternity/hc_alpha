@@ -30,6 +30,6 @@ RUN cd assets && \
 
 ADD . .
 
-RUN mix do compile, phx.digest
+RUN mix do compile, assets.deploy
 
 CMD ["./entrypoint.sh"]
