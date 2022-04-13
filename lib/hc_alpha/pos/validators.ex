@@ -9,7 +9,10 @@ defmodule HcAlpha.Pos.Validators do
 
   def subscribe(), do: Pos.subscribe(@pubsub)
 
-  def broadcast(msg), do: Pos.broadcast(@pubsub, {:validators, msg})
+  def broadcast(msg) do
+    Pos.broadcast(@pubsub, {:validators, msg})
+    msg
+  end
 
   def create(address, height, status, stake, balance) do
     attrs = %{
@@ -38,18 +41,20 @@ defmodule HcAlpha.Pos.Validators do
   end
 
   def addresses() do
-    Repo.all(from v in Validator,
-      distinct: v.address,
-      select: v.address
+    Repo.all(
+      from v in Validator,
+        distinct: v.address,
+        select: v.address
     )
   end
 
   def get_limited(address, limit) do
-    Repo.all(from v in Validator,
-      where: v.address == ^address,
-      order_by: [desc: v.height],
-      select: v,
-      limit: ^limit
+    Repo.all(
+      from v in Validator,
+        where: v.address == ^address,
+        order_by: [desc: v.height],
+        select: v,
+        limit: ^limit
     )
   end
 

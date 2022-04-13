@@ -1,4 +1,6 @@
-<h4 class="mt-4">Validators</h4>
+<h3 class="mt-4">Validators
+  <%= link "History", to: Routes.static_path(@socket, "/validators"), class: "btn btn-light" %>
+</h3>
 <table class="table">
   <thead>
     <tr>
@@ -21,4 +23,3 @@
     <% end %>
   </tbody>
 </table>
-<%= link "History", to: Routes.static_path(@socket, "/validators"), class: "btn btn-light" %>

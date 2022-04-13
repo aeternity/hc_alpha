@@ -1,0 +1,23 @@
+<h3 class="mt-4">Delegates</h3>
+<%= for {validator, delegates} <- @delegates do %>
+  <h6 class="mt-4"><%= validator %></h6>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Delegate</th>
+        <th scope="col">Stake</th>
+        <th scope="col">% of shares</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= for delegate <- delegates do %>
+        <tr>
+          <td><%= delegate.address %></td>
+          <td><%= to_ae_stake(delegate) %> AE</td>
+          <td><%= to_shares(delegate) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<% end %>
