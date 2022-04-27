@@ -9,9 +9,10 @@ import Config
 
 config :hc_alpha,
   ecto_repos: [HcAlpha.Repo],
-  # node_url: "http://localhost:3013",
+  wallet_url: "https://base.aepps.com",
+  node_url: "http://localhost:3013",
   # node_url: "http://3.105.185.75:3013"
-  node_url: "http://13.239.157.207:3013",
+  # node_url: "http://13.239.157.207:3013",
   contract_id: "ct_LRbi65kmLtE7YMkG6mvG5TxAXTsPJDZjAtsPuaXtRyPA7gnfJ",
   contract_name: "MainStaking.aes"
 

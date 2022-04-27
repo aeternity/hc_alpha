@@ -3,6 +3,7 @@ defmodule HcAlphaWeb.StakingController do
 
   def index(conn, _params) do
     node = HcAlpha.Node.url()
-    render(conn, "index.html", %{node: node})
+    wallet = Application.fetch_env!(:hc_alpha, :wallet_url)
+    render(conn, "index.html", %{node: node, wallet: wallet})
   end
 end

@@ -4,6 +4,7 @@
   @address="address = $event"
   @networkId="networkId = $event"
   :nodeUrl="nodeUrl"
+  :walletUrl="walletUrl"
 />
 
 <Component
@@ -27,10 +28,12 @@ export default {
     aeSdk: null,
     address: '',
     networkId: '',
-    nodeUrl: ''
+    nodeUrl: '',
+    walletUrl: ''
   }),
   mounted () {
     this.nodeUrl = document.getElementById('nodeUrl').value
+    this.walletUrl = document.getElementById('walletUrl').value
   }
 }
 </script>

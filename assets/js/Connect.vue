@@ -53,14 +53,14 @@ export default {
     networkId: String,
   },
   props: {
-    nodeUrl: { type: String, default: '' }
+    nodeUrl: { type: String, default: '' },
+    walletUrl: { type: String, default: 'http://localhost:8080' }
   },
   data: () => ({
     aeSdk: null,
     walletConnected: false,
     connectPromise: null,
     reverseIframe: null,
-    walletUrl: 'https://base.aepps.com',
     walletAddress: '',
     nodeBalance: null,
     nodeHeight: null
