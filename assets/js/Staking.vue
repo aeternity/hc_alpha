@@ -49,7 +49,7 @@
 
 <script>
 import Value from './Value.vue'
-import { AmountFormatter } from './vendor/aepp-sdk-js/src'
+import { AmountFormatter } from '@aeternity/aepp-sdk'
 
 const contractSource = `
 include "List.aes"

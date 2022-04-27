@@ -41,8 +41,8 @@
 </template>
 
 <script>
-import { RpcAepp, Node, WalletDetector, BrowserWindowMessageConnection } from './vendor/aepp-sdk-js/src'
-import { AmountFormatter } from './vendor/aepp-sdk-js/src'
+import { RpcAepp, Node, WalletDetector, BrowserWindowMessageConnection } from '@aeternity/aepp-sdk'
+import { AmountFormatter } from '@aeternity/aepp-sdk'
 
 const COMPILER_URL = 'https://compiler.aepps.com'
 
@@ -118,7 +118,7 @@ export default {
         this.aeSdk = await RpcAepp({
           name: 'Simple æpp',
           nodes: [
-            { name: 'hc', instance: await Node({ url: this.nodeUrl }) }
+            { name: 'hc', instance: await Node({ url: this.nodeUrl, ignoreVersion: true }) }
           ],
           compilerUrl: COMPILER_URL,
           onNetworkChange: ({ networkId }) => {
