@@ -238,7 +238,7 @@ export default {
   },
   methods: {
     async stake () {
-      result = this.contract.methods.stake(this.stakeValidator, { amount: BigInt(AmountFormatter.toAettos(this.stakeAmount)) })
+      result = this.contract.methods.stake(this.stakeValidator, { amount: AmountFormatter.toAettos(this.stakeAmount) })
       this.stakeAmount = ''
       return result
     },

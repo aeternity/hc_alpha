@@ -9,7 +9,7 @@ import Config
 
 config :hc_alpha,
   ecto_repos: [HcAlpha.Repo],
-  wallet_url: "https://base.aepps.com",
+  wallet_url: "http://localhost:8080",
   node_url: "http://localhost:3013",
   # node_url: "http://3.105.185.75:3013"
   # node_url: "http://13.239.157.207:3013",
