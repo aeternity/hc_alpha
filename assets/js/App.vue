@@ -5,6 +5,7 @@
   @networkId="networkId = $event"
   :nodeUrl="nodeUrl"
   :walletUrl="walletUrl"
+  :faucetUrl="faucetUrl"
 />
 
 <Component
@@ -29,11 +30,13 @@ export default {
     address: '',
     networkId: '',
     nodeUrl: '',
-    walletUrl: ''
+    walletUrl: '',
+    faucetUrl
   }),
   mounted () {
     this.nodeUrl = document.getElementById('nodeUrl').value
     this.walletUrl = document.getElementById('walletUrl').value
+    this.faucetUrl = document.getElementById('faucetUrl').value
   }
 }
 </script>

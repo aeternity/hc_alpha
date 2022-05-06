@@ -9,6 +9,7 @@ import Config
 
 config :hc_alpha,
   ecto_repos: [HcAlpha.Repo],
+  faucet_url: "http://localhost:5001",
   wallet_url: "http://localhost:8080",
   node_url: "http://localhost:3013",
   # node_url: "http://3.105.185.75:3013"

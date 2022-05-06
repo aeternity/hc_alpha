@@ -2,7 +2,11 @@
 <div class="row mt-3">
   <div class="row mt-6">
     <div class="col-sm-3"> Wallet url</div>
-    <div class="col-sm-6">{{ this.walletUrl }}</div>
+    <div class="col-sm-6"><a target="_blank" :href="this.walletUrl">{{ this.walletUrl }}</a></div>
+  </div>
+  <div class="row mt-6">
+    <div class="col-sm-3"> Faucet url</div>
+    <div class="col-sm-6"><a target="_blank" :href="this.faucetUrl">{{ this.faucetUrl }}</a></div>
   </div>
 
   <div class="row mt-6" v-if="walletConnected">
@@ -54,7 +58,8 @@ export default {
   },
   props: {
     nodeUrl: { type: String, default: '' },
-    walletUrl: { type: String, default: 'http://localhost:8080' }
+    faucetUrl: { type: String, default: '' },
+    walletUrl: { type: String, default: '' }
   },
   data: () => ({
     aeSdk: null,
