@@ -1,4 +1,6 @@
-<h3 class="mt-4">Delegates</h3>
+<h3 class="mt-4">Delegates
+  <%= link "Staking", to: Routes.static_path(@socket, "/staking"), class: "btn btn-light" %>
+</h3>
 <%= for {validator, delegates} <- @delegates do %>
   <h6 class="mt-4"><%= validator %></h6>
   <table class="table">
