@@ -25,7 +25,7 @@ defmodule HcAlpha.Node do
             "amount" => 0,
             "calldata" => calldata,
             "contract" => contract,
-            "gas" => 1_000_00
+            "gas" => 2_000_000
           }
         }
       end)
