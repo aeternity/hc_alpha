@@ -26,7 +26,7 @@ defmodule HcAlphaWeb.DelegatesLive do
   defp group(d), do: Enum.group_by(d, & &1.validator)
 
   def to_shares(delegate) do
-    stake = Decimal.new(delegate.stake)
+    stake = Decimal.new(delegate.shares)
     ae = Decimal.from_float(:math.pow(10, 18))
 
     Decimal.div(stake, ae)
@@ -35,12 +35,25 @@ defmodule HcAlphaWeb.DelegatesLive do
   end
 
   def to_percent_shares(delegate) do
-    stake = Decimal.new(delegate.stake)
-    total = Decimal.new(delegate.total_shares)
+    shares = Decimal.new(delegate.shares)
+    total_shares = Decimal.new(delegate.total_shares)
 
-    Decimal.div(stake, total)
+    Decimal.div(shares, total_shares)
     |> Decimal.mult(100)
     |> Decimal.normalize()
     |> Decimal.to_string(:normal)
   end
+
+  def to_stake(delegate) do
+    shares = Decimal.new(delegate.shares)
+    total_shares = Decimal.new(delegate.total_shares)
+    total_stake = Decimal.new(delegate.total_stake)
+
+    Decimal.mult(shares, total_stake)
+    |> Decimal.div(total_shares)
+    |> Decimal.to_float()
+    |> aetto_to_ae()
+  end
+
+  defp aetto_to_ae(aetto), do: aetto / :math.pow(10, 18)
 end

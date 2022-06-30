@@ -9,6 +9,7 @@
         <th scope="col">Delegate</th>
         <th scope="col">shares</th>
         <th scope="col">% of shares</th>
+        <th scope="col">stake</th>
       </tr>
     </thead>
     <tbody>
@@ -17,6 +18,7 @@
           <td><%= delegate.address %></td>
           <td><%= to_shares(delegate) %></td>
           <td><%= to_percent_shares(delegate) %></td>
+          <td><%= to_stake(delegate) %> AE</td>
         </tr>
       <% end %>
     </tbody>

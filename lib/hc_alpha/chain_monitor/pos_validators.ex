@@ -55,13 +55,15 @@ defmodule HcAlpha.ChainMonitor.PosValidators do
   end
 
   defp to_delegates(list) do
-    Enum.flat_map(list, fn {v, %{value: {_, stakers, total_shares}}} ->
-      for {address, stake} <- stakers do
+    Enum.flat_map(list, fn {v, %{value: {_contract, total_stake, _online, state}}} ->
+      {_, _, _, _, stakers, total_shares} = state
+      for {address, shares} <- stakers do
         %{
           address: address,
           validator: v.address,
-          stake: stake,
-          total_shares: total_shares
+          shares: shares,
+          total_shares: total_shares,
+          total_stake: total_stake
         }
       end
     end)
